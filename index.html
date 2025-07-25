@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidha Sankalpa - Personal Webpage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50;
+        }
+        .modal-open {
+            overflow: hidden;
+        }
+        .modal-open .modal-backdrop, .modal-open .modal {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-30 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-gray-900">Sidha Sankalpa Moharana</a>
+                </div>
+                <div class="hidden md:block">
+                    <nav class="flex items-center space-x-4">
+                        <a href="#about" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">About Me</a>
+                        <a href="#research" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Research</a>
+                        <a href="#publications" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Publications</a>
+                        <a href="#experience" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Experience</a>
+                        <a href="#blog" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="#gallery" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Gallery</a>
+                        <a href="#contact" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </nav>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                        <svg class="h-6 w-6 hidden" id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">About Me</a>
+                <a href="#research" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Research</a>
+                <a href="#publications" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Publications</a>
+                <a href="#experience" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Experience</a>
+                <a href="#blog" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="#gallery" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
+                <a href="#contact" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <!-- About Me Section -->
+        <section id="about" class="py-16">
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-1 flex justify-center">
+                    <img class="rounded-full h-48 w-48 md:h-64 md:w-64 object-cover shadow-lg" src="DisplayPic_1.png" alt="Sidha Sankalpa">
+                </div>
+                <div class="md:col-span-2">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-2">Sidha Sankalpa Moharana</h1>
+                    <p class="text-xl text-indigo-600 font-semibold mb-4">Ph.D. Candidate in Atmosphere and Ocean Sciences at IIT Bhubaneswar</p>
+                    <p class="text-gray-600 mb-6">
+                        Welcome to my personal webpage! I am a passionate researcher focusing on the current changes in global tropical cyclone activity. My work involves analyzing the historical as well as future trends of tropical cyclone activity and associated drivers. I am always eager to explore new ideas and collaborate on exciting projects.
+                    </p>
+                    <a href="SSM_CV.pdf" download class="inline-block bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 transform hover:-translate-y-1">
+                        Download CV
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="py-16 bg-white rounded-xl shadow-md">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Research Interests</h2>
+                <p class="text-lg text-gray-600 mb-8">My research lies at the intersection of [Field 1], [Field 2], and [Field 3]. I am particularly interested in the following areas:</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 max-w-6xl mx-auto">
+                <!-- Research Interest 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg text-center">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Topic 1</h3>
+                    <p class="text-gray-600">A brief, one-sentence description of this research topic and why it's interesting or important.</p>
+                </div>
+                <!-- Research Interest 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg text-center">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Topic 2</h3>
+                    <p class="text-gray-600">A brief, one-sentence description of this research topic and why it's interesting or important.</p>
+                </div>
+                <!-- Research Interest 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg text-center">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Topic 3</h3>
+                    <p class="text-gray-600">A brief, one-sentence description of this research topic and why it's interesting or important.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="py-16">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Publications</h2>
+            </div>
+            <div class="space-y-8 max-w-4xl mx-auto">
+                <!-- Publication 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="text-gray-800 font-semibold">Author 1, Author 2, and <span class="font-bold">Your Name</span>. (Year). "Title of the Publication." <em class="text-gray-600">Journal or Conference Name</em>.</p>
+                    <div class="mt-3">
+                        <button class="abstract-button text-indigo-600 hover:text-indigo-800 font-semibold text-sm" data-abstract="This is the abstract for the first paper. It provides a concise summary of the work, including the problem, methods, results, and conclusions. Replace this with your actual abstract.">View Abstract</button>
+                        <a href="#" class="ml-4 text-indigo-600 hover:text-indigo-800 font-semibold text-sm">[PDF]</a>
+                        <a href="#" class="ml-4 text-indigo-600 hover:text-indigo-800 font-semibold text-sm">[Code]</a>
+                    </div>
+                </div>
+                <!-- Publication 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="text-gray-800 font-semibold"><span class="font-bold">Your Name</span>, Author 3, and Author 4. (Year). "Title of Another Great Paper." <em class="text-gray-600">Another Prestigious Journal</em>.</p>
+                    <div class="mt-3">
+                        <button class="abstract-button text-indigo-600 hover:text-indigo-800 font-semibold text-sm" data-abstract="This is the abstract for the second paper. It should be a clear and brief overview of your research contribution. Make sure to replace this placeholder text.">View Abstract</button>
+                        <a href="#" class="ml-4 text-indigo-600 hover:text-indigo-800 font-semibold text-sm">[PDF]</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-16 bg-white rounded-xl shadow-md">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Experience</h2>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <!-- Experience Item 1 -->
+                <div class="relative pl-8 sm:pl-12 py-4 border-l-2 border-indigo-200">
+                    <div class="absolute -left-3 top-4 h-6 w-6 bg-white border-4 border-indigo-500 rounded-full"></div>
+                    <p class="text-sm text-gray-500">Month Year - Month Year</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-1">Job Title / Position</h3>
+                    <p class="text-md text-gray-600 font-medium">Company / Institution Name</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600">
+                        <li>Key responsibility or achievement.</li>
+                        <li>Another key responsibility or achievement.</li>
+                    </ul>
+                </div>
+                <!-- Experience Item 2 -->
+                <div class="relative pl-8 sm:pl-12 py-4 border-l-2 border-indigo-200">
+                    <div class="absolute -left-3 top-4 h-6 w-6 bg-white border-4 border-indigo-500 rounded-full"></div>
+                    <p class="text-sm text-gray-500">Month Year - Month Year</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-1">Teaching Assistant</h3>
+                    <p class="text-md text-gray-600 font-medium">University Name</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600">
+                        <li>Assisted with [Course Name].</li>
+                        <li>Held office hours and graded assignments.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="py-16">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Latest Blog Posts</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Blog Post 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                    <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Blog+Image" alt="Blog post image" class="h-48 w-full object-cover">
+                    <div class="p-6">
+                        <p class="text-sm text-gray-500 mb-2">Date Published</p>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Blog Post Title</h3>
+                        <p class="text-gray-600 mb-4">A short excerpt or summary of your blog post goes here...</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <!-- Blog Post 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                    <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Blog+Image" alt="Blog post image" class="h-48 w-full object-cover">
+                    <div class="p-6">
+                        <p class="text-sm text-gray-500 mb-2">Date Published</p>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Another Interesting Topic</h3>
+                        <p class="text-gray-600 mb-4">A short excerpt or summary of your blog post goes here...</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <!-- Blog Post 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                    <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Blog+Image" alt="Blog post image" class="h-48 w-full object-cover">
+                    <div class="p-6">
+                        <p class="text-sm text-gray-500 mb-2">Date Published</p>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">A Deep Dive into a Subject</h3>
+                        <p class="text-gray-600 mb-4">A short excerpt or summary of your blog post goes here...</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-16 bg-white rounded-xl shadow-md">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-8">Gallery</h2>
+                </div>
+                <!-- Masonry-style grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid gap-4">
+                        <div>
+                            <img class="h-auto max-w-full rounded-lg shadow-md" src="https://placehold.co/500x800/E0E7FF/4F46E5?text=Portrait" alt="">
+                        </div>
+                        <div>
+                            <img class="h-auto max-w-full rounded-lg shadow-md" src="https://placehold.co/500x500/E0E7FF/4F46E5?text=Square" alt="">
+                        </div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div>
+                            <img class="h-auto max-w-full rounded-lg shadow-md" src="https://placehold.co/500x500/E0E7FF/4F46E5?text=Square" alt="">
+                        </div>
+                        <div>
+                            <img class="h-auto max-w-full rounded-lg shadow-md" src="https://placehold.co/500x700/E0E7FF/4F46E5?text=Tall" alt="">
+                        </div>
+                         <div>
+                            <img class="h-auto max-w-full rounded-lg shadow-md" src="https://placehold.co/500x400/E0E7FF/4F46E5?text=Landscape" alt="">
+                        </div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div>
+                            <img class="h-auto max-w-full rounded-lg shadow-md" src="https://placehold.co/500x700/E0E7FF/4F46E5?text=Tall" alt="">
+                        </div>
+                        <div>
+                            <img class="h-auto max-w-full rounded-lg shadow-md" src="https://placehold.co/500x500/E0E7FF/4F46E5?text=Square" alt="">
+                        </div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div>
+                            <img class="h-auto max-w-full rounded-lg shadow-md" src="https://placehold.co/500x500/E0E7FF/4F46E5?text=Square" alt="">
+                        </div>
+                        <div>
+                            <img class="h-auto max-w-full rounded-lg shadow-md" src="https://placehold.co/500x800/E0E7FF/4F46E5?text=Portrait" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16">
+            <div class="max-w-4xl mx-auto text-center bg-white p-12 rounded-xl shadow-md">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+                <p class="text-lg text-gray-600 mb-8">I'm always open to discussing research, new projects, and collaboration opportunities. Feel free to reach out!</p>
+                <a href="mailto:your.email@example.com" class="inline-block bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">
+                    Email Me
+                </a>
+                <div class="flex justify-center space-x-6 mt-8">
+                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-gray-500">
+            <p>&copy; 2024 Your Name. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Abstract Modal -->
+    <div id="modal-backdrop" class="modal-backdrop"></div>
+    <div id="abstract-modal" class="modal w-11/12 md:max-w-2xl bg-white rounded-lg shadow-xl p-6 md:p-8">
+        <div class="relative">
+            <button id="close-modal-button" class="absolute -top-4 -right-4 md:-top-6 md:-right-6 text-gray-500 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Abstract</h3>
+            <div id="modal-content" class="text-gray-600 prose">
+                <!-- Abstract content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOpenIcon = document.getElementById('menu-open-icon');
+        const menuCloseIcon = document.getElementById('menu-close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuOpenIcon.classList.toggle('hidden');
+            menuCloseIcon.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileNavLinks = document.querySelectorAll('#mobile-menu a, header nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuOpenIcon.classList.remove('hidden');
+                menuCloseIcon.classList.add('hidden');
+            });
+        });
+
+        // Abstract Modal Logic
+        const abstractButtons = document.querySelectorAll('.abstract-button');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const abstractModal = document.getElementById('abstract-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalButton = document.getElementById('close-modal-button');
+
+        function openModal(abstractText) {
+            modalContent.textContent = abstractText;
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            document.body.classList.remove('modal-open');
+        }
+
+        abstractButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const abstract = button.getAttribute('data-abstract');
+                openModal(abstract);
+            });
+        });
+
+        closeModalButton.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && document.body.classList.contains('modal-open')) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
