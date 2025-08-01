@@ -41,7 +41,7 @@
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Header & Navigation -->
-    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-30 shadow-sm">
+    <header id="main-header" class="bg-white/80 backdrop-blur-sm sticky top-0 z-30 shadow-sm transition-transform duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
@@ -53,6 +53,7 @@
                         <a href="#experience" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Experience</a>
                         <a href="#education" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Education</a>
                         <a href="#publications" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Publications</a>
+                        <a href="#awards" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Achievements</a>
                         <a href="#gallery" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Gallery</a>
                         <a href="#contact" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                     </nav>
@@ -78,6 +79,7 @@
                 <a href="#experience" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Experience</a>
                 <a href="#education" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Education</a>
                 <a href="#publications" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Publications</a>
+                <a href="#awards" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Achievements</a>
                 <a href="#gallery" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
                 <a href="#contact" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
             </div>
@@ -87,7 +89,7 @@
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
         <!-- About Me Section -->
-        <section id="about" class="py-16">
+        <section id="about" class="pt-8 pb-16">
             <div class="grid md:grid-cols-3 gap-8 items-center">
                 <div class="md:col-span-1 flex justify-center">
                     <img class="rounded-full h-48 w-48 md:h-64 md:w-64 object-cover shadow-lg" src="DisplayPic_1.png" alt="Sidha Sankalpa">
@@ -98,7 +100,7 @@
                     <p class="text-gray-600 mb-6">
                         Welcome to my personal webpage! I am a passionate researcher focusing on the current changes in global tropical cyclone activity. My work involves analyzing the historical as well as future trends of tropical cyclone activity and associated drivers. I am always eager to explore new ideas and collaborate on exciting projects.
                     </p>
-                    <a href="SSM_CV.pdf" download class="inline-block bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 transform hover:-translate-y-1">
+                    <a href="SSM_CV.pdf" target="blank" download class="inline-block bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 transform hover:-translate-y-1">
                         Download CV
                     </a>
                 </div>
@@ -128,6 +130,115 @@
                 </div>
             </div>
         </section>
+		<!-- Add this entire section to your HTML file, for example, after the "Research" section -->
+		<section id="skills-projects" class="pt-16 pb-0">
+			<div class="max-w-6xl mx-auto px-4">
+				<div class="text-center">
+					<h2 class="text-3xl font-bold text-gray-900 mb-4">Technical Skills & Projects</h2>
+					<p class="text-lg text-gray-600 mb-12">A showcase of my programming abilities and a few projects I've worked on.</p>
+				</div>
+
+				<!-- Skills Overview -->
+				<div class="bg-white p-8 rounded-xl shadow-md mb-16">
+					<h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">My Toolkit</h3>
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+						<!-- Languages -->
+						<div>
+							<h4 class="text-lg font-semibold text-indigo-600 mb-3">Languages</h4>
+							<div class="flex flex-wrap gap-2">
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">MATLAB</span>
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">R</span>
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">Ferret</span>
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">JavaScript</span>
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">HTML5</span>
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">CSS3</span>
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">SQL</span>
+							</div>
+						</div>
+						<!-- Frameworks & Libraries -->
+						<div>
+							<h4 class="text-lg font-semibold text-indigo-600 mb-3">Libraries & Data</h4>
+							<div class="flex flex-wrap gap-2">
+								<span class="inline-block bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Pandas</span>
+								<span class="inline-block bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Matplotlib</span>
+								<span class="inline-block bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">scikit-learn</span>
+								<span class="inline-block bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Earth Observation & Modelling</span>
+								<span class="inline-block bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Ground Station and Field Observations</span>
+							</div>
+						</div>
+						<!-- Tools & Design -->
+						<div>
+							<h4 class="text-lg font-semibold text-indigo-600 mb-3">Tools & Models</h4>
+							<div class="flex flex-wrap gap-2">
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">Git & GitHub</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">Photoshop</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">Ferret</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">Python APIs</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">ROMS & CROCO</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">WRF (Coupled)</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">Modelling in HPCs</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Featured Projects -->
+				<div class="grid md:grid-cols-2 gap-10">
+					<!-- Project Card 1 -->
+					<div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
+						<img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=TLE+Research" alt="Project 1 Screenshot" class="h-56 w-full object-cover">
+						<div class="p-6">
+							<h3 class="text-xl font-semibold text-gray-800 mb-2">Properties of Mesoscale Convective Systems & TLEs</h3>
+							<p class="text-gray-600 mb-4">A summer research project characterizing 10 Transient Luminous Events (TLEs) and their parent thunderstorm properties over central India.</p>
+							<div class="mb-4">
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">MATLAB</span>
+								<span class="inline-block bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Remote Sensing Data Analysis</span>
+								<span class="inline-block bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">High-speed TLE Imaging System</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Scientific Computing</span>
+							</div>
+							<div class="flex space-x-4">
+								<a href="EGU2020-19407-print.pdf" target="blank" class="inline-block bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">Abstract</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Project Card 2 -->
+					<div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300">
+						<img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Cyclone+Fani" alt="Cyclone Fani Research Project" class="h-56 w-full object-cover">
+						<div class="p-6">
+							<h3 class="text-xl font-semibold text-gray-800 mb-2">ESCS Fani: Troposphere-Ionosphere Coupling Study</h3>
+							<p class="text-gray-600 mb-4">Analyzing the meteorological and electrical properties of Extremely Severe Cyclonic Storm Fani, focusing on its role in coupling the lower and upper atmosphere.</p>
+							 <div class="mb-4">
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">MATLAB & Python</span>
+								<span class="inline-block bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">KALPANA1, VLF, WWLLN, GLD360, GPS-TEC</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Gravity Wave Modelling</span>
+							</div>
+							<div class="flex space-x-4">
+								<a href="http://dx.doi.org/10.13140/RG.2.2.22190.52807" target="blank" class="inline-block bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">View Thesis</a>
+							</div>
+						</div>
+					</div>
+					<!-- Project Card 3 -->
+					<div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition duration-300 md:col-span-2 md:mx-auto lg:mx-0 lg:col-span-1">
+						<img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Weather+Website" alt="Automated Weather System Project" class="h-56 w-full object-cover">
+						<div class="p-6">
+							<h3 class="text-xl font-semibold text-gray-800 mb-2">Automated Campus Weather Data System</h3>
+							<p class="text-gray-600 mb-4">Developed and deployed an end-to-end system to fetch data from a ground station, process it into hourly stats and plots, and automatically update the campus weather website.</p>
+							 <div class="mb-4">
+								<span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Python</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Meteorological Data</span>
+								<span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Automation</span>
+								<span class="inline-block bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Wix API</span>
+								 <span class="inline-block bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Cloudinary</span>
+							</div>
+							<div class="flex space-x-4">
+								<a href="http://bhusagar.in/campus-weather" target="_blank" class="inline-block bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">Live Website</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 		
         <!-- Experience Section -->
         <section id="experience" class="py-16">
@@ -249,8 +360,65 @@
                 </div>
             </div>
         </section>
+		
+		<!-- Awards & Accolades Section -->
+        <section id="awards" class="pt-0 pb-16">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Achievements</h2>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="relative pl-8 sm:pl-12 py-4 border-l-2 border-indigo-200">
+                    <div class="absolute -left-2.5 top-5 h-5 w-5 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <p class="text-sm text-gray-500">Year - 2025</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-1">Qualified GATE2025 - Geology and Geophysics</h3>
+                    <p class="text-md text-gray-600 font-medium">Organised by IIT Roorkee</p>
+                </div>
+                <div class="relative pl-8 sm:pl-12 py-4 border-l-2 border-indigo-200">
+                    <div class="absolute -left-2.5 top-5 h-5 w-5 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <p class="text-sm text-gray-500">Year - 2024</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-1">Received DST-SERB International Travel Grant to attend AOGS 2024 in South Korea.</h3>
+                    <p class="text-md text-gray-600 font-medium">Awarding Agency: Dept. of Science & Technology, Govt. of India</p>
+                </div>
+				<div class="relative pl-8 sm:pl-12 py-4 border-l-2 border-indigo-200">
+                    <div class="absolute -left-2.5 top-5 h-5 w-5 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <p class="text-sm text-gray-500">Year - 2019</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-1">Qualified CSIR JRF - Earth, Atmospheric, Ocean and Planetary Sciences</h3>
+                    <p class="text-md text-gray-600 font-medium">Organised by CSIR/National Testing Agency</p>
+                </div>
+				<div class="relative pl-8 sm:pl-12 py-4 border-l-2 border-indigo-200">
+                    <div class="absolute -left-2.5 top-5 h-5 w-5 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <p class="text-sm text-gray-500">Year - 2015-2020</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-1">Received INSPIRE Scholarship for Higher Education</h3>
+                    <p class="text-md text-gray-600 font-medium">Awarding Agency: Dept. of Science & Technology, Govt. of India</p>
+                </div>
+				<div class="relative pl-8 sm:pl-12 py-4 border-l-2 border-indigo-200">
+                    <div class="absolute -left-2.5 top-5 h-5 w-5 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <p class="text-sm text-gray-500">Year - 2015</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-1">Received Medhabruti Scholarship</h3>
+                    <p class="text-md text-gray-600 font-medium">Awarding Agency: Govt. of Odisha</p>
+                </div>
+				<div class="relative pl-8 sm:pl-12 py-4 border-l-2 border-indigo-200">
+                    <div class="absolute -left-2.5 top-5 h-5 w-5 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <p class="text-sm text-gray-500">Year - 2012-2015</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-1">Received Pathani Samanta Mathematics Scholarship</h3>
+                    <p class="text-md text-gray-600 font-medium">Awarding Agency: Govt. of Odisha</p>
+                </div>
+            </div>
+        </section>
 
-        <!-- 1. Replace your entire old gallery section with this HTML -->
+        <!-- Gallery Section -->
 		<section id="gallery" class="py-16 bg-white rounded-xl shadow-md">
 			<div class="max-w-4xl mx-auto px-4">
 				<div class="text-center">
@@ -286,7 +454,7 @@
 
 
         <!-- Contact Section -->
-        <section id="contact" class="py-16">
+        <section id="contact" class="pt-16 pb-0">
             <div class="max-w-4xl mx-auto px-4">
                 <div class="text-center">
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Get In Touch</h2>
@@ -372,6 +540,11 @@
             </div>
         </div>
     </div>
+	
+	<!-- Scroll to Top Button -->
+	<button id="scroll-to-top-btn" class="hidden fixed bottom-6 right-6 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-opacity duration-300">
+		<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+	</button>
 
 
     <script>
@@ -429,6 +602,21 @@
                 closeModal();
             }
         });
+		
+		// --- Hiding Header on Scroll ---
+		const header = document.getElementById('main-header');
+		let lastScrollY = window.scrollY;
+
+		window.addEventListener('scroll', () => {
+			if (lastScrollY < window.scrollY) {
+				// Scrolling Down
+				header.classList.add('-translate-y-full');
+			} else {
+				// Scrolling Up
+				header.classList.remove('-translate-y-full');
+			}
+			lastScrollY = window.scrollY;
+		});
     </script>
 	<!-- 2. Add this JavaScript inside the <script> tag at the bottom of your file -->
 	<script>
@@ -534,6 +722,25 @@
 		   showImage(0);
 		   startAutoplay();
 		}
+		// --- Scroll to Top Button Logic ---
+		const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+
+		// Show or hide the button based on scroll position
+		window.addEventListener('scroll', () => {
+			if (window.scrollY > 300) { // Show the button after scrolling 300px
+				scrollToTopBtn.classList.remove('hidden');
+			} else {
+				scrollToTopBtn.classList.add('hidden');
+			}
+		});
+
+		// Scroll to top on click
+		scrollToTopBtn.addEventListener('click', () => {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		});
 	</script>
 </body>
 </html>
