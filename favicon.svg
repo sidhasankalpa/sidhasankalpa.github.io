@@ -1,16 +1,40 @@
 <svg width="64" height="64" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .cyclone-group {
-      transform-origin: center;
-      animation: rotate 3s linear infinite;
-    }
-    @keyframes rotate {
-      from { transform: rotate(360deg); }
-      to { transform: rotate(0deg); }
-    }
-  </style>
-  <g class="cyclone-group" fill="none" stroke="#D3D3D3" stroke-width="3.5" stroke-linecap="round">
-    <path d="M12 12c0-3.866 3.134-7 7-7"/>
-    <path d="M12 12c0 3.866-3.134 7-7 7"/>
-  </g>
+<style>
+.cyclone-group {
+transform-origin: center;
+animation: rotate-ccw 4s linear infinite;
+}
+@keyframes rotate-ccw {
+from { transform: rotate(360deg); }
+to { transform: rotate(0deg); }
+}
+</style>
+
+<defs>
+<!-- Mask to create the "eye" in the center -->
+<mask id="eye-mask">
+<rect width="24" height="24" fill="white" />
+<circle cx="12" cy="12" r="2" fill="black" />
+</mask>
+</defs>
+
+<g class="cyclone-group" fill="#D3D3D3" mask="url(#eye-mask)">
+<!-- Arm 1: Enlarged base shape, reaching closer to the edges -->
+<path d="M 12 12 C 8 15, 2 12, 2 5 C 6 7, 14 10, 12 12 Z" />
+<!-- Arm 2 (60deg) -->
+<path d="M 12 12 C 8 15, 2 12, 2 5 C 6 7, 14 10, 12 12 Z" transform="rotate(60 12 12)" />
+<!-- Arm 3 (120deg) -->
+<path d="M 12 12 C 8 15, 2 12, 2 5 C 6 7, 14 10, 12 12 Z" transform="rotate(120 12 12)" />
+<!-- Arm 4 (180deg) -->
+<path d="M 12 12 C 8 15, 2 12, 2 5 C 6 7, 14 10, 12 12 Z" transform="rotate(180 12 12)" />
+<!-- Arm 5 (240deg) -->
+<path d="M 12 12 C 8 15, 2 12, 2 5 C 6 7, 14 10, 12 12 Z" transform="rotate(240 12 12)" />
+<!-- Arm 6 (300deg) -->
+<path d="M 12 12 C 8 15, 2 12, 2 5 C 6 7, 14 10, 12 12 Z" transform="rotate(300 12 12)" />
+
+<!-- A soft inner glow to define the center -->
+<circle cx="12" cy="12" r="4" fill="none" stroke="#D3D3D3" stroke-width="0.5" opacity="0.3" />
+
+
+</g>
 </svg>
