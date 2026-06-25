@@ -83,7 +83,9 @@
     .hero-temp { font-family: 'Space Grotesk', sans-serif; font-size: 88px; font-weight: 700; line-height: 1; color: var(--text); letter-spacing: -0.04em; }
     .hero-temp sup { font-size: 36px; vertical-align: super; color: var(--muted); }
     .hero-info { padding-bottom: 8px; flex: 1; }
-    .hero-condition { font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    
+    /* Updated Condition Layout */
+    .hero-condition { font-size: 24px; font-weight: 500; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .hero-location { font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
     
     .hero-meta { margin-left: auto; text-align: right; padding-bottom: 8px; border-left: 1px solid var(--border); padding-left: 20px; }
@@ -153,8 +155,8 @@
 <header>
   <div class="pulse-dot"></div>
   <h1>Weather Dashboard</h1>
-
-  <a href="/" class="ml-4 text-sm font-medium text-indigo-400 hover:text-indigo-300 transition">
+  
+  <a href="/" class="ml-4 text-sm font-medium text-indigo-400 hover:text-indigo-300 transition" style="margin-left: 15px; color: var(--accent2); text-decoration: none;">
     &larr; Profile Page
   </a>
   
@@ -170,7 +172,7 @@
   <div id="splash">
     <div class="splash-icon">🌍</div>
     <h2>Search any city</h2>
-    <p>Type a city name to load the dashboard.</p>
+    <p>Type a city name to load the advanced meteorological dashboard.</p>
   </div>
 
   <div id="loading"><div class="spinner"></div><span id="loading-text">Loading weather…</span></div>
@@ -179,7 +181,10 @@
     <div class="hero" id="hero-box">
       <div class="hero-temp" id="hero-temp">—<sup>°C</sup></div>
       <div class="hero-info">
-        <div class="hero-condition" id="hero-condition">—</div>
+        <div class="hero-condition">
+            <span id="hero-icon"></span>
+            <span id="hero-label">—</span>
+        </div>
         <div class="hero-location" id="hero-location">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           <span id="hero-loc-text">—</span>
@@ -385,8 +390,8 @@
   async function fetchWeather(lat, lon, tz) {
     const tzParam = encodeURIComponent(tz || 'auto');
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`
-      + `&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,cloud_cover,surface_pressure,visibility,uv_index,shortwave_radiation`
-      + `&hourly=temperature_2m,precipitation_probability,weather_code,soil_temperature_0cm,soil_moisture_0_to_1cm`
+      + `&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,cloud_cover,surface_pressure`
+      + `&hourly=temperature_2m,precipitation_probability,weather_code,soil_temperature_0cm,soil_moisture_0_to_7cm,visibility,uv_index,shortwave_radiation`
       + `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,et0_fao_evapotranspiration`
       + `&timezone=${tzParam}&past_days=7&forecast_days=7`;
     const res = await fetch(url);
@@ -397,7 +402,6 @@
   function render(d, cityName) {
     const c = d.current, daily = d.daily, hourly = d.hourly;
 
-    // Determine Weather-Aware Background Class
     const heroBox = document.getElementById('hero-box');
     heroBox.className = 'hero'; 
     const code = c.weather_code;
@@ -408,23 +412,27 @@
     else if ((code >= 71 && code <= 77) || code === 85 || code === 86) heroBox.classList.add('bg-snow');
     else if (code >= 95) heroBox.classList.add('bg-storm');
 
-    // Hero Updates
     document.getElementById('hero-temp').innerHTML = `${Math.round(c.temperature_2m)}<sup>°C</sup>`;
-    document.getElementById('hero-condition').textContent = wmoLabel(c.weather_code);
+    
+    // FIXED: Render the Icon AND the Label in the Hero Block
+    document.getElementById('hero-icon').textContent = wmoIcon(c.weather_code);
+    document.getElementById('hero-label').textContent = wmoLabel(c.weather_code);
+    
     document.getElementById('hero-loc-text').textContent = cityName;
     document.getElementById('hero-feels').textContent = `${Math.round(c.apparent_temperature)}°C`;
     
-    // Hero Metadata
     document.getElementById('hero-humidity').textContent = `${c.relative_humidity_2m}%`;
     document.getElementById('hero-wind').textContent = `${Math.round(c.wind_speed_10m)} km/h`;
     
-    const uv = c.uv_index ?? 0;
+    const currentHourStr = c.time.substring(0, 14) + "00";
+    const curHourIdx = Math.max(0, hourly.time.findIndex(t => t >= currentHourStr));
+
+    const uv = hourly.uv_index[curHourIdx] ?? 0;
     document.getElementById('hero-uv').textContent = uv;
 
-    // 1. Temp Anomaly (Calculated against 14-day average max)
     const maxTemps = daily.temperature_2m_max;
     const meanMax = maxTemps.reduce((a, b) => a + b, 0) / maxTemps.length;
-    const todayMax = maxTemps[7]; // Index 7 is today
+    const todayMax = maxTemps[7]; 
     const anomaly = (todayMax - meanMax);
     const anomalyStr = anomaly > 0 ? `+${anomaly.toFixed(1)}` : anomaly.toFixed(1);
     const anomalyColor = anomaly > 0 ? 'var(--red)' : 'var(--accent2)';
@@ -432,16 +440,13 @@
     anomalyEl.innerHTML = `${anomalyStr}<span class="metric-unit">°C</span>`;
     anomalyEl.style.color = anomalyColor;
 
-    // 2. Rain Probability
     const rainP = daily.precipitation_probability_max[7] || 0;
     document.getElementById('val-rain').textContent = rainP;
     setGauge('rain-gauge', rainP, 0, 100);
 
-    // 3. Wind Compass
     document.getElementById('val-wind').textContent = Math.round(c.wind_speed_10m);
     document.getElementById('wind-compass').style.transform = `rotate(${c.wind_direction_10m || 0}deg)`;
 
-    // 4. UV Gauge
     document.getElementById('val-uv').textContent = uv;
     let uvColor = 'var(--green)'; let uvLabel = 'Low';
     if (uv >= 3) { uvColor = 'var(--yellow)'; uvLabel = 'Moderate'; }
@@ -453,49 +458,36 @@
     document.getElementById('uv-gauge').style.stroke = uvColor;
     setGauge('uv-gauge', uv, 0, 11);
 
-    // 5. Solar Radiation
-    const solRad = c.shortwave_radiation ?? 0;
-    document.getElementById('val-solar').textContent = solRad;
-    setGauge('solar-gauge', solRad, 0, 1000); // Max expected around 1000 W/m²
+    const solRad = hourly.shortwave_radiation[curHourIdx] ?? 0;
+    document.getElementById('val-solar').textContent = Math.round(solRad);
+    setGauge('solar-gauge', solRad, 0, 1000); 
 
-    // 6. Cloud Cover
     document.getElementById('val-cloud').textContent = c.cloud_cover;
     setGauge('cloud-gauge', c.cloud_cover, 0, 100);
 
-    // 7. Pressure
     const press = Math.round(c.surface_pressure);
     document.getElementById('val-pressure').textContent = press;
     setGauge('pressure-gauge', press, 950, 1050);
 
-    // 8. Visibility
-    const visKm = Math.round((c.visibility || 0) / 1000);
+    const visKm = Math.round((hourly.visibility[curHourIdx] || 0) / 1000);
     document.getElementById('val-vis').textContent = visKm;
     setGauge('vis-gauge', visKm, 0, 24);
 
-    // 9. Sunrise/Sunset
     document.getElementById('val-sunrise').textContent = formatTime(daily.sunrise[7]);
     document.getElementById('val-sunset').textContent = formatTime(daily.sunset[7]);
-
-    // Hourly parameters for Soil 
-    const currentHourStr = c.time.substring(0, 14) + "00";
-    const curHourIdx = hourly.time.findIndex(t => t >= currentHourStr) || 0;
     
-    // 10. Soil Moisture
-    const soilM = hourly.soil_moisture_0_to_1cm[curHourIdx];
-    document.getElementById('val-soil-m').innerHTML = `${soilM}<span class="linear-unit-small"> m³/m³</span>`;
+    const soilM = hourly.soil_moisture_0_to_7cm[curHourIdx] ?? 0;
+    document.getElementById('val-soil-m').innerHTML = `${soilM.toFixed(2)}<span class="linear-unit-small"> m³/m³</span>`;
     setBar('bar-soil-m', soilM, 0, 0.5); 
 
-    // 11. Soil Temp
-    const soilT = hourly.soil_temperature_0cm[curHourIdx];
+    const soilT = hourly.soil_temperature_0cm[curHourIdx] ?? 0;
     document.getElementById('val-soil-t').innerHTML = `${Math.round(soilT)}<span class="linear-unit-small"> °C</span>`;
     setBar('bar-soil-t', soilT, -10, 50);
 
-    // 12. ET
-    const evapo = daily.et0_fao_evapotranspiration[7]; 
+    const evapo = daily.et0_fao_evapotranspiration[7] ?? 0; 
     document.getElementById('val-evapo').innerHTML = `${evapo.toFixed(1)}<span class="linear-unit-small"> mm</span>`;
     setBar('bar-evapo', evapo, 0, 10);
 
-    // Hourly Strip
     const strip = document.getElementById('hourly-strip');
     strip.innerHTML = '';
     for (let i = curHourIdx; i < curHourIdx + 24 && i < hourly.time.length; i++) {
@@ -504,7 +496,6 @@
       strip.innerHTML += `<div class="hcard"><div class="hcard-time">${lbl}</div><div class="hcard-icon">${wmoIcon(hourly.weather_code[i])}</div><div class="hcard-temp">${Math.round(hourly.temperature_2m[i])}°</div><div class="hcard-rain">${hourly.precipitation_probability[i] || 0}%</div></div>`;
     }
 
-    // 14-Day Combo Chart
     if (comboChart) { comboChart.destroy(); }
 
     const labels = daily.time.map(t => new Date(t).toLocaleDateString('en-US', {weekday: 'short', month: 'numeric', day: 'numeric'}));
@@ -517,7 +508,6 @@
 
     const tempRanges = daily.temperature_2m_max.map((max, i) => [daily.temperature_2m_min[i], max]);
 
-    // Dynamic Chart Scaling Logic (Nearest 5)
     const globalMin = Math.min(...daily.temperature_2m_min);
     const globalMax = Math.max(...daily.temperature_2m_max);
     const scaleMin = Math.floor(globalMin / 5) * 5;
@@ -571,7 +561,6 @@
     document.getElementById('dashboard').style.display = 'block';
   }
 
-  // Search Logic
   const input = document.getElementById('city-input');
   const acBox = document.getElementById('autocomplete');
 
@@ -621,7 +610,6 @@
     catch(e) { document.getElementById('loading').innerHTML = `<div style="color:#f85149;">⚠️ Failed to load</div>`; }
   }
 
-  // Default Initialization
   loadCity(20.2961, 85.8245, 'Bhubaneswar, Odisha, India', 'Asia/Kolkata');
 </script>
 </body>
