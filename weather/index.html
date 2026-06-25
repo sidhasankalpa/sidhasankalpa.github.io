@@ -83,8 +83,6 @@
     .hero-temp { font-family: 'Space Grotesk', sans-serif; font-size: 88px; font-weight: 700; line-height: 1; color: var(--text); letter-spacing: -0.04em; }
     .hero-temp sup { font-size: 36px; vertical-align: super; color: var(--muted); }
     .hero-info { padding-bottom: 8px; flex: 1; }
-    
-    /* Updated Condition Layout */
     .hero-condition { font-size: 24px; font-weight: 500; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .hero-location { font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
     
@@ -134,13 +132,18 @@
     .hcard-temp { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; }
     .hcard-rain { font-size: 10px; color: #79c0ff; margin-top: 3px; }
 
-    /* 14-Day Combo Chart */
+    /* Map & Charts */
     .chart-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 28px; }
     .chart-wrap { position: relative; height: 350px; width: 100%; }
 
+    /* Map Buttons */
+    .map-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+    .map-btn:hover { border-color: var(--accent2); }
+    .map-btn.active { background: var(--accent2); color: #ffffff; border-color: var(--accent2); }
+
     @media (max-width: 600px) {
       header { padding: 12px 16px; }
-      .search-wrap { max-width: 100%; min-width: 0; flex: 1 1 100%; order: 3; margin-left: 0; }
+      .search-wrap { max-width: 100%; min-width: 0; flex: 1 1 100%; order: 3; margin-left: 0; margin-top: 10px; }
       .hero { flex-direction: column; gap: 12px; align-items: flex-start; }
       .hero-temp { font-size: 64px; }
       .hero-meta { margin-left: 0; text-align: left; border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 12px; width: 100%; }
@@ -341,6 +344,19 @@
       <div class="chart-wrap"><canvas id="comboChart" role="img" aria-label="14-day history and forecast"></canvas></div>
     </div>
 
+    <div class="section-head">Interactive Weather Maps</div>
+    <div class="chart-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 28px;">
+      <div style="padding: 16px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; gap: 8px; flex-wrap: wrap;" id="map-controls">
+        <button class="map-btn active" data-layer="temp">🌡️ Temperature</button>
+        <button class="map-btn" data-layer="rain">🌧️ Precipitation</button>
+        <button class="map-btn" data-layer="clouds">☁️ Cloud Cover</button>
+        <button class="map-btn" data-layer="radar">📡 Radar / Satellite</button>
+      </div>
+      <div style="height: 450px; width: 100%; position: relative;">
+        <iframe id="weather-map-iframe" width="100%" height="100%" frameborder="0" src=""></iframe>
+      </div>
+    </div>
+
   </div>
 </main>
 
@@ -358,6 +374,11 @@
 
   let comboChart = null;
   let acTimer = null;
+  
+  // Map Variables
+  let currentMapLayer = 'temp';
+  let currentLat = 20.2961;
+  let currentLon = 85.8245;
 
   const setGauge = (id, value, min, max) => {
     const gauge = document.getElementById(id);
@@ -399,6 +420,22 @@
     return res.json();
   }
 
+  // Handle map iframe updates
+  function updateMap() {
+    const iframe = document.getElementById('weather-map-iframe');
+    iframe.src = `https://embed.windy.com/embed2.html?lat=${currentLat}&lon=${currentLon}&detailLat=${currentLat}&detailLon=${currentLon}&zoom=8&level=surface&overlay=${currentMapLayer}&product=ecmwf&menu=&message=&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1`;
+  }
+
+  // Handle Map Buttons
+  document.querySelectorAll('.map-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.map-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentMapLayer = e.target.getAttribute('data-layer');
+        updateMap();
+    });
+  });
+
   function render(d, cityName) {
     const c = d.current, daily = d.daily, hourly = d.hourly;
 
@@ -414,7 +451,7 @@
 
     document.getElementById('hero-temp').innerHTML = `${Math.round(c.temperature_2m)}<sup>°C</sup>`;
     
-    // FIXED: Render the Icon AND the Label in the Hero Block
+    // Inject Weather Icon directly next to the label
     document.getElementById('hero-icon').textContent = wmoIcon(c.weather_code);
     document.getElementById('hero-label').textContent = wmoLabel(c.weather_code);
     
@@ -606,10 +643,15 @@
   async function loadCity(lat, lon, name, tz) {
     document.getElementById('splash').style.display = 'none'; document.getElementById('dashboard').style.display = 'none';
     document.getElementById('loading').style.display = 'flex'; document.getElementById('loading-text').textContent = `Loading ${name}…`;
-    try { render(await fetchWeather(lat, lon, tz), name); } 
+    try { 
+        currentLat = lat; currentLon = lon; // Update global coordinates for the map
+        render(await fetchWeather(lat, lon, tz), name); 
+        updateMap(); // Call updateMap AFTER data loads successfully
+    } 
     catch(e) { document.getElementById('loading').innerHTML = `<div style="color:#f85149;">⚠️ Failed to load</div>`; }
   }
 
+  // Default Initialization for Bhubaneswar
   loadCity(20.2961, 85.8245, 'Bhubaneswar, Odisha, India', 'Asia/Kolkata');
 </script>
 </body>
