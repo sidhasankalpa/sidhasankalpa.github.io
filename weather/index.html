@@ -658,8 +658,49 @@
     catch(e) { document.getElementById('loading').innerHTML = `<div style="color:#f85149;">⚠️ Failed to load</div>`; }
   }
 
-  // Default Initialization for Bhubaneswar
-  loadCity(20.2961, 85.8245, 'Bhubaneswar, Odisha, India', 'Asia/Kolkata');
+  // --- IP Geolocation Initialization ---
+  async function estimateUserLocation() {
+      // Display the loading interface while estimating the location
+      document.getElementById('splash').style.display = 'none'; 
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('loading').style.display = 'flex'; 
+      document.getElementById('loading-text').textContent = `Estimating your location...`;
+
+      try {
+          const response = await fetch('https://ipapi.co/json/');
+          
+          if (!response.ok) {
+              throw new Error(`HTTP network error encountered: ${response.status}`);
+          }
+          
+          const data = await response.json();
+          
+          const city = data.city;
+          const region = data.region;
+          const country = data.country_name;
+          const lat = parseFloat(data.latitude);
+          const lon = parseFloat(data.longitude);
+          const tz = data.timezone || 'auto';
+          
+          // Verify that essential geospatial data exists before invoking loadCity
+          if (lat && lon && city) {
+              const locationName = [city, region, country].filter(Boolean).join(', ');
+              console.log(`Estimated geographical location: ${locationName} (Lat: ${lat}, Lon: ${lon})`);
+              loadCity(lat, lon, locationName, tz);
+          } else {
+              throw new Error("Geospatial data was incomplete in the parsed IP geolocation response.");
+          }
+          
+      } catch (error) {
+          console.warn("The IP geolocation approximation failed to resolve. Falling back to the default parameters for Bhubaneswar.", error);
+          
+          // Execute the fallback initialization
+          loadCity(20.2961, 85.8245, 'Bhubaneswar, Odisha, India', 'Asia/Kolkata');
+      }
+  }
+
+  // Execute the geographic estimation protocol upon script execution
+  estimateUserLocation();
 </script>
 </body>
 </html>
